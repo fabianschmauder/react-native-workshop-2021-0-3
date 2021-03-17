@@ -1,6 +1,7 @@
 import {loadAlbums} from "../services/albumService";
-import {ScrollView, Text, View} from "react-native";
+import {ScrollView} from "react-native";
 import React, {useEffect, useState} from 'react';
+import Album from "../components/Album";
 
 export default function AlbumScreen() {
 
@@ -12,9 +13,7 @@ export default function AlbumScreen() {
 
     return (
         <ScrollView>
-            {albums.map(album => <View key={album.id}>
-                <Text>{album.title}</Text>
-            </View>)}
+            {albums.map(album => <Album key={album.id} title={album.title}/>)}
         </ScrollView>
     );
 }
