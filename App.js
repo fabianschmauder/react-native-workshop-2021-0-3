@@ -1,25 +1,17 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
-import {Text, View, ScrollView} from 'react-native';
-import {loadAlbums} from "./src/services/albumService";
+import React from 'react';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AlbumScreen from "./src/screens/AlbumsScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
 
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-
-    const [albums, setAlbums] = useState([]);
-
-    useEffect(() => {
-        loadAlbums().then(setAlbums)
-    }, [])
-
-    return (
-        <View>
-            <StatusBar style="auto"/>
-            <ScrollView>
-                {albums.map(album => <View key={album.id}>
-                    <Text>{album.title}</Text>
-                </View>)}
-            </ScrollView>
-        </View>
-    );
+    return (<NavigationContainer>
+                <Tab.Navigator>
+                    <Tab.Screen name="Albums" component={AlbumScreen} />
+                    <Tab.Screen name="Settings" component={SettingsScreen} />
+                </Tab.Navigator>
+            </NavigationContainer>);
 }
